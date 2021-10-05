@@ -15,8 +15,8 @@ public class FlightService {
 	@Autowired
 	FlightRepository flightRepo;
 	
-	public void addFlight() {
-		
+	public void addFlight(Flight flight) {
+		flightRepo.save(flight);
 	}
 	
 	public void schedulFlight() {

@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.example.demo.model.Flight.Flight;
-import com.example.demo.model.User.User;
 
 
 @Entity
@@ -19,12 +17,12 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
-	String name;
-	String emailId;
-	int noOfSeatsBooked;
-	ArrayList<User> passengerDetailList;
-	Meal meal;
-	Flight flight;
+	private String name;
+	private String emailId;
+	private int noOfSeatsBooked;
+	private ArrayList<String> passengerDetailList;
+	private Meal meal;
+	private int flightPnr;
 	
 	
 	
@@ -52,10 +50,10 @@ public class Booking {
 	public void setNoOfSeatsBooked(int noOfSeatsBooked) {
 		this.noOfSeatsBooked = noOfSeatsBooked;
 	}
-	public ArrayList<User> getPassengerDetailList() {
+	public ArrayList<String> getPassengerDetailList() {
 		return passengerDetailList;
 	}
-	public void setPassengerDetailList(ArrayList<User> passengerDetailList) {
+	public void setPassengerDetailList(ArrayList<String> passengerDetailList) {
 		this.passengerDetailList = passengerDetailList;
 	}
 	public Meal getMeal() {
@@ -64,11 +62,11 @@ public class Booking {
 	public void setMeal(Meal meal) {
 		this.meal = meal;
 	}
-	public Flight getFlight() {
-		return flight;
+	public int getFlight() {
+		return flightPnr;
 	}
-	public void setFlight(Flight flight) {
-		this.flight = flight;
+	public void setFlight(int flight) {
+		this.flightPnr = flight;
 	}
 	
 }

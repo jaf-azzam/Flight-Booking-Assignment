@@ -18,14 +18,13 @@ public class Flight {
 	String flightFrom;
 	String flightTo;
 	Trip trip;
-	Seats noOfSeats;
-	int flightNo;
+//	Seats noOfSeats;
+	int noOfSeats;
 	
 	
+	public Flight() {}
 	
-	
-	public Flight(Integer id, String date, String time, String flightFrom, String flightTo, Trip trip, Seats noOfSeats,
-			int flightNo) {
+	public Flight(Integer id, String date, String time, String flightFrom, String flightTo, Trip trip, int noOfSeats) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -34,7 +33,6 @@ public class Flight {
 		this.flightTo = flightTo;
 		this.trip = trip;
 		this.noOfSeats = noOfSeats;
-		this.flightNo = flightNo;
 	}
 	
 	
@@ -69,16 +67,11 @@ public class Flight {
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
-	public Seats getNoOfSeats() {
+	public int getNoOfSeats() {
 		return noOfSeats;
 	}
-	public void setNoOfSeats(Seats noOfSeats) {
+	public void setNoOfSeats(int noOfSeats) {
 		this.noOfSeats = noOfSeats;
 	}
-	public int getFlightNo() {
-		return flightNo;
-	}
-	public void setFlightNo(int flightNo) {
-		this.flightNo = flightNo;
-	}
+	
 }

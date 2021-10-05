@@ -20,7 +20,7 @@ import com.example.demo.service.FlightService;
 
 
 //@RestController
-@RestController("/api/v1.0/flight/")
+@RestController("api/v1.0/flight/")
 public class FlightController {
 
 	@Autowired
@@ -33,62 +33,102 @@ public class FlightController {
 	FlightService flightService;
 	
 	
+	boolean isAdmin;
+	
+	
+	// Mapping for testing end point
 	@GetMapping
 	public String testEndPoint() {
 		return "Api End point working fine !";
 	}
 	
+	
+	
+	// For creating a new booking
 	@PostMapping("airline/register")
-	public void newBooking(@RequestBody Booking booking) {
+	public String newBooking(@RequestBody Booking booking) {
 		
 		bookingService.saveBooking(booking);
-		System.out.println("Booking created successfully");
-
+		return "Booking created successfully";
 	}
+	
 	
 	
 	@PostMapping("admin/login")
-	public void adminLogin() {
-		
+	public String adminLogin() {
 		adminService.adminLogin();
+		isAdmin = true;
+		return "Admin Logged In";
 	}
+	
+	
+	
 	
 	
 	@PostMapping("airline/inventory/add")
-	public void addInvetory(@PathVariable int flightNo) {
-		if(flightService.searchFlight(flightNo) == null) {
-			flightService.addFlight();
+	public String addInvetory(@RequestBody Flight flight) {
+		
+		if(isAdmin) {
+			
+			flightService.addFlight(flight);
+			
+			return "Flight Added Successfully";
 		}
-		else
-			flightService.schedulFlight();
+		
+		return "Login as Admin to add or schedule a flight";
+		
+		
 	}
 	
 	
-	@PostMapping("flight/search")
+	
+	
+	@GetMapping("search")
 	public List<Flight> search() {
 		return flightService.findAll();
 	}
 	
 	
-	@PostMapping("booking/{flightd}")
-	public void bookTicket() {
+	
+	
+	
+	@PostMapping("booking/{flightId}")
+	public Integer bookTicket(@PathVariable int flightId, @RequestBody Booking booking) {
 		
-		bookingService.saveBooking(booking);
+		booking.setFlight(flightId * 10 + 131);
+		return bookingService.saveBooking(booking);
 		
 	}
+	
+	
+	
+	
 	
 	@GetMapping("ticket/{pnr}")
-	public void getTicketFromPnr() {
-		
+	public void getTicketFromPnr(@PathVariable int pnr) {
+		bookingService.getFlight(pnr);
 	}
 	
-	@GetMapping("booking/history/{emailid}")
-	public void getTicketHistoryBasedOnEmail() {
-		
+	
+	
+	
+	
+	
+	@GetMapping("booking/history/{email}")
+	public List<Booking> getTicketHistoryBasedOnEmail(@PathVariable String email) {
+		return bookingService.getFlightByEmail(email);
 	}
+	
+	
+	
+	
+	
 	
 	@DeleteMapping("booking/cancel/{pnr}")
-	public void cancelTicket() {
-		
+	public String cancelTicket(@PathVariable int pnr) {
+		return bookingService.cancelBooking(pnr);
 	}
+	
+	
+	
 }

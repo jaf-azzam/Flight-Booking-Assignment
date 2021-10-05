@@ -16,7 +16,8 @@ public class User {
 	
 	String name;
 	String emailId;
-	
+	Gender gender;
+	int age;
 	
 	public String getName() {
 		return name;
@@ -42,7 +43,6 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	Gender gender;
-	int age;
+
 	
 }
